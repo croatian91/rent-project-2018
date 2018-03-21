@@ -1,17 +1,24 @@
 package fr.dauphine.rentproject2018.web;
 
+import fr.dauphine.rentproject2018.domain.Configuration;
+import fr.dauphine.rentproject2018.service.ConfigurationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("administration")
 public class AdministrationController {
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String edit(Model model) {
-        model.addAttribute("config", null);
+    @Autowired
+    private ConfigurationService configurationService;
+
+    @RequestMapping("edit")
+    public String editLatestConfiguration(Model model) {
+        Configuration current = configurationService.findLast();
+
+        model.addAttribute("configuration", current);
 
         return "administration/edit";
     }

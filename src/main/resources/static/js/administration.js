@@ -9,7 +9,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: 'PUT',
-                url: '/api/administration/update',
+                url: '/api/administration/create',
                 data: $('form').serialize(),
                 cache: false,
                 processData: false,

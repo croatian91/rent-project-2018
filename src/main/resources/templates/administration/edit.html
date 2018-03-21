@@ -13,13 +13,13 @@
     <div id="alert" class="alert alert-warning collapse">
         <span id="message"></span>
     </div>
-    <form name="f" th:action="@{/api/administration/update}" th:object="${config}" method="post" class="needs-validation" novalidate>
+    <form name="f" th:action="@{/api/administration/update}" th:object="${configuration}" method="post" class="needs-validation" novalidate>
         <div class="form-group">
             <legend>Configuration details</legend>
             <div class="row">
                 <div class="col-sm-4">
                     <label for="max_rental_duration">Maximum rental duration (in days)</label>:
-                    <input type="text" id="max_rental_duration" class="form-control" name="max_rental_duration" required/>
+                    <input type="text" id="max_rental_duration" class="form-control" name="max_rental_duration" th:field="${configuration.N_DML}" required/>
                     <div class="invalid-feedback">
                         Please provide a maximum rental duration.
                     </div>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label for="min_rental_duration">Minimum rental duration (in days)</label>:
-                    <input type="text" id="min_rental_duration" class="form-control" name="min_rental_duration" required/>
+                    <input type="text" id="min_rental_duration" class="form-control" name="min_rental_duration" th:field="${configuration.N_DmL}" required/>
                     <div class="invalid-feedback">
                         Please provide a minimum rental duration.
                     </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label for="max_booking_duration">Maximum booking duration</label>:
-                    <input type="text" id="max_booking_duration" class="form-control" name="max_booking_duration" required/>
+                    <input type="text" id="max_booking_duration" class="form-control" name="max_booking_duration" th:field="${configuration.N_DMR}" required/>
                     <div class="invalid-feedback">
                         Please provide a maximum booking duration.
                     </div>
@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <label for="daily_forfeit_amount">Daily forfeit amount</label>:
-                <input type="text" id="daily_forfeit_amount" class="form-control" name="daily_forfeit_amount" required/>
+                <input type="text" id="daily_forfeit_amount" class="form-control" name="daily_forfeit_amount" th:field="${configuration.A_DJ}" required/>
                 <div class="invalid-feedback">
                     Please provide a daily forfeit amount.
                 </div>
@@ -54,7 +54,7 @@
             </div>
             <div class="col-sm-4">
                 <label for="max_products_ranted">Maximum number of products rented</label>:
-                <input type="text" id="max_products_ranted" class="form-control" name="max_products_ranted" required/>
+                <input type="text" id="max_products_ranted" class="form-control" name="max_products_ranted" th:field="${configuration.N_MOL}" required/>
                 <div class="invalid-feedback">
                     Please provide a maximum number of products rented.
                 </div>
@@ -62,7 +62,7 @@
             </div>
             <div class="col-sm-4">
                 <label for="max_products_booked">Maximum number of products booked</label>:
-                <input type="text" id="max_products_booked" class="form-control" name="max_products_booked" required/>
+                <input type="text" id="max_products_booked" class="form-control" name="max_products_booked" th:field="${configuration.N_MOR}" required/>
                 <div class="invalid-feedback">
                     Please provide a maximum number of products booked.
                 </div>
