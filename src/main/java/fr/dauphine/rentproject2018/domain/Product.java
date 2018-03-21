@@ -1,6 +1,7 @@
 package fr.dauphine.rentproject2018.domain;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +15,7 @@ public class Product {
     private String defaults;
     private Category category;
     private RentalPoint rentalPoint;
+    private Collection<Booking> bookings;
 
     @Id
     @Column(name = "id")
@@ -124,5 +126,14 @@ public class Product {
 
     public void setRentalPoint(RentalPoint rentalPoint) {
         this.rentalPoint = rentalPoint;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    public Collection<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Collection<Booking> bookings) {
+        this.bookings = bookings;
     }
 }

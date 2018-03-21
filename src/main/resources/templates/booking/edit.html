@@ -21,11 +21,11 @@
             <div class="row">
                 <div class="col-sm-3">
                     <label for="bookingID">Booking ID</label>:
-                    <input type="text" id="bookingID" class="form-control" name="bookingID" readonly="readonly"/> <br/>
+                    <input type="text" id="bookingID" class="form-control" name="bookingID" th:field="${booking.id}" readonly="readonly"/> <br/>
                 </div>
                 <div class="col-sm-6">
                     <label for="rental_point">Rental point</label>:
-                    <input type="text" id="rental_point" class="form-control" name="rental_point" readonly="readonly"/>
+                    <input type="text" id="rental_point" class="form-control" name="rental_point" th:field="${booking.description}" readonly="readonly"/>
                     <br/>
                 </div>
                 <div class="col-sm-3">

@@ -10,6 +10,7 @@ public class Booking {
     private Date start;
     private Date end;
     private User user;
+    private Product product;
 
     @Id
     @Column(name = "id")
@@ -66,5 +67,15 @@ public class Booking {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
