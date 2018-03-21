@@ -1,0 +1,19 @@
+input {
+    width: 50px;
+}
+
+form[name="f"] {
+    margin: 100px;
+}
+
+.form-actions, .jumbotron, .alert, .card {
+    margin-top: 25px;
+}
+
+#carouselExampleIndicators {
+    margin-bottom: 15px;
+}
+
+.oi-eye {
+    cursor: pointer;
+}

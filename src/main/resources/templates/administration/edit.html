@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title tiles:fragment="title">Edit administration details</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <!-- Alert -->
+    <div id="alert" class="alert alert-warning collapse">
+        <span id="message"></span>
+    </div>
+    <form name="f" th:action="@{/api/administration/update}" th:object="${config}" method="post" class="needs-validation" novalidate>
+        <div class="form-group">
+            <legend>Configuration details</legend>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="max_rental_duration">Maximum rental duration (in days)</label>:
+                    <input type="text" id="max_rental_duration" class="form-control" name="max_rental_duration" required/>
+                    <div class="invalid-feedback">
+                        Please provide a maximum rental duration.
+                    </div>
+                    <br/>
+                </div>
+                <div class="col-sm-4">
+                    <label for="min_rental_duration">Minimum rental duration (in days)</label>:
+                    <input type="text" id="min_rental_duration" class="form-control" name="min_rental_duration" required/>
+                    <div class="invalid-feedback">
+                        Please provide a minimum rental duration.
+                    </div>
+                    <br/>
+                </div>
+                <div class="col-sm-4">
+                    <label for="max_booking_duration">Maximum booking duration</label>:
+                    <input type="text" id="max_booking_duration" class="form-control" name="max_booking_duration" required/>
+                    <div class="invalid-feedback">
+                        Please provide a maximum booking duration.
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="daily_forfeit_amount">Daily forfeit amount</label>:
+                <input type="text" id="daily_forfeit_amount" class="form-control" name="daily_forfeit_amount" required/>
+                <div class="invalid-feedback">
+                    Please provide a daily forfeit amount.
+                </div>
+                <br/>
+            </div>
+            <div class="col-sm-4">
+                <label for="max_products_ranted">Maximum number of products rented</label>:
+                <input type="text" id="max_products_ranted" class="form-control" name="max_products_ranted" required/>
+                <div class="invalid-feedback">
+                    Please provide a maximum number of products rented.
+                </div>
+                <br/>
+            </div>
+            <div class="col-sm-4">
+                <label for="max_products_booked">Maximum number of products booked</label>:
+                <input type="text" id="max_products_booked" class="form-control" name="max_products_booked" required/>
+                <div class="invalid-feedback">
+                    Please provide a maximum number of products booked.
+                </div>
+                <br/>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button id="update" type="button" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="webjars/jquery/2.1.4/jquery.min.js" th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+<script src="webjars/tether/1.3.7/dist/js/tether.min.js"
+        th:src="@{/webjars/tether/1.3.7/dist/js/tether.min.js}"></script>
+<script src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+<script src="js/administration.js" th:src="@{/js/administration.js}"></script>
+</html>
