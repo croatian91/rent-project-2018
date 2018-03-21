@@ -1,5 +1,9 @@
 package fr.dauphine.rentproject2018.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -25,6 +29,7 @@ public class Booking {
 
     @Basic
     @Column(name = "start")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date getStart() {
         return start;
     }
@@ -35,6 +40,7 @@ public class Booking {
 
     @Basic
     @Column(name = "end")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date getEnd() {
         return end;
     }
@@ -61,10 +67,12 @@ public class Booking {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     public User getUser() {
         return user;
     }
 
+    @JsonProperty
     public void setUser(User user) {
         this.user = user;
     }

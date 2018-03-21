@@ -1,5 +1,8 @@
 package fr.dauphine.rentproject2018.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -47,10 +50,12 @@ public class Category {
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category")
+    @JsonIgnore
     public Collection<Product> getProducts() {
         return products;
     }
 
+    @JsonProperty
     public void setProducts(Collection<Product> products) {
         this.products = products;
     }

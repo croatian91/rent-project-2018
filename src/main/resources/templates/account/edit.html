@@ -13,59 +13,71 @@
     <div id="alert" class="alert alert-warning collapse">
         <span id="message"></span>
     </div>
-        <form name="f" th:action="@{/api/product/update}" th:object="${user}" method="post" class="needs-validation" novalidate>
-            <div class="form-group row">
-                <div class="col-sm-6">
+    <form name="f" th:action="@{/api/product/update}" th:object="${user}" method="post" class="needs-validation"
+          novalidate>
+        <div class="form-group row">
+            <div class="col-sm-6">
 
                 <legend>User details</legend>
 
-                    <input type="hidden" id="id" name="id" class="form-control"
-                           th:field="${user.id}"/>
+                <input type="hidden" id="id" name="id" class="form-control"
+                       th:field="${user.id}"/>
 
                 <label for="firstname">First name</label>:
-                <input type="text" id="firstName" class="form-control" name="firstName" th:field="${user.firstName}" readonly="readonly"/> <br/>
+                <input type="text" id="firstName" class="form-control" name="firstName" th:field="${user.firstName}"
+                       readonly="readonly"/> <br/>
 
                 <label for="lastName">Last name</label>:
-                <input type="text" id="lastName" class="form-control" name="lastName" th:field="${user.lastName}" readonly="readonly"/> <br/>
+                <input type="text" id="lastName" class="form-control" name="lastName" th:field="${user.lastName}"
+                       readonly="readonly"/> <br/>
 
                 <label for="address">Address</label>:
-                <input type="text" id="address" class="form-control" name="address" th:field="${user.address}" autofocus="autofocus" required/> <br/>
-
-                    <div class="form-actions">
-                        <button id="update" type="button" class="btn btn-primary">Update</button>
-                        <button id="delete" type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal">Delete account</button>
-                    </div>
+                <input type="text" id="address" class="form-control" name="address" th:field="${user.address}"
+                       autofocus="autofocus" required/>
+                <div class="invalid-feedback">
+                    Please provide an address.
                 </div>
-                <div class="col-sm-6">
-                    <legend>Account details</legend>
+                <br/>
 
-
-                    <label for="username">Username</label>:
-                    <input type="text" id="username" name="username" th:field="${user.username}" class="form-control" readonly="readonly"/> <br/>
-
-                    <label for="email">Email</label>:
-                    <input type="text" id="email" name="email" th:field="${user.email}" class="form-control" required/>
-                    <div class="invalid-feedback">
-                        Please provide an email.
-                    </div>
-                    <br/>
-
-                    <label for="password">Password</label>:
-                    <input type="password" id="password" class="form-control"  th:field="${user.password}" name="password" required/>
-                    <div class="invalid-feedback">
-                        Please provide a password.
-                    </div>
-                    <br/>
-
-                    <label for="passwordConfirm">Confirm password</label>:
-                    <input type="password" id="passwordConfirm" class="form-control" name="passwordConfirm" required/>
-                    <div class="invalid-feedback">
-                        Please provide a confirm password.
-                    </div>
-                    <br/>
+                <div class="form-actions">
+                    <button id="update" type="button" class="btn btn-primary">Update</button>
+                    <button id="delete" type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#confirmModal">Delete account
+                    </button>
                 </div>
             </div>
-        </form>
+            <div class="col-sm-6">
+                <legend>Account details</legend>
+
+
+                <label for="username">Username</label>:
+                <input type="text" id="username" name="username" th:field="${user.username}" class="form-control"
+                       readonly="readonly"/> <br/>
+
+                <label for="email">Email</label>:
+                <input type="text" id="email" name="email" th:field="${user.email}" class="form-control" required/>
+                <div class="invalid-feedback">
+                    Please provide an email.
+                </div>
+                <br/>
+
+                <label for="password">Password</label>:
+                <input type="password" id="password" class="form-control" th:field="${user.password}" name="password"
+                       required/>
+                <div class="invalid-feedback">
+                    Please provide a password.
+                </div>
+                <br/>
+
+                <label for="passwordConfirm">Confirm password</label>:
+                <input type="password" id="passwordConfirm" class="form-control" name="passwordConfirm" required/>
+                <div class="invalid-feedback">
+                    Please provide a confirm password.
+                </div>
+                <br/>
+            </div>
+        </div>
+    </form>
 
     <!-- Confirm Modal -->
     <div id="confirmModal" class="modal" tabindex="-1" role="dialog">

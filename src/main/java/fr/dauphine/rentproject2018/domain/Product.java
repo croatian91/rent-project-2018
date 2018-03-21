@@ -1,5 +1,8 @@
 package fr.dauphine.rentproject2018.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -69,7 +72,7 @@ public class Product {
     }
 
     @Basic
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
@@ -79,7 +82,7 @@ public class Product {
     }
 
     @Basic
-    @Column(name = "defaults")
+    @Column(name = "defaults", columnDefinition = "TEXT")
     public String getDefaults() {
         return defaults;
     }
@@ -129,10 +132,12 @@ public class Product {
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    @JsonIgnore
     public Collection<Booking> getBookings() {
         return bookings;
     }
 
+    @JsonProperty
     public void setBookings(Collection<Booking> bookings) {
         this.bookings = bookings;
     }
