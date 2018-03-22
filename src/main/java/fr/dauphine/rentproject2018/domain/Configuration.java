@@ -1,6 +1,7 @@
 package fr.dauphine.rentproject2018.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -26,6 +27,7 @@ public class Configuration {
 
     @Basic
     @Column(name = "N_DMaxL")
+    @NotNull
     public int getN_DML() {
         return N_DML;
     }
@@ -36,6 +38,7 @@ public class Configuration {
 
     @Basic
     @Column(name = "N_DMinL")
+    @NotNull
     public int getN_DmL() {
         return N_DmL;
     }
@@ -46,6 +49,7 @@ public class Configuration {
 
     @Basic
     @Column(name = "A_DJ")
+    @NotNull
     public int getA_DJ() {
         return A_DJ;
     }
@@ -56,6 +60,7 @@ public class Configuration {
 
     @Basic
     @Column(name = "N_MOR")
+    @NotNull
     public int getN_MOR() {
         return N_MOR;
     }
@@ -66,6 +71,7 @@ public class Configuration {
 
     @Basic
     @Column(name = "N_DMR")
+    @NotNull
     public int getN_DMR() {
         return N_DMR;
     }
@@ -76,6 +82,7 @@ public class Configuration {
 
     @Basic
     @Column(name = "N_MOL")
+    @NotNull
     public int getN_MOL() {
         return N_MOL;
     }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -27,6 +28,7 @@ public class RentalPoint {
 
     @Basic
     @Column(name = "name")
+    @NotNull
     public String getName() {
         return name;
     }
@@ -37,6 +39,7 @@ public class RentalPoint {
 
     @Basic
     @Column(name = "address")
+    @NotNull
     public String getAddress() {
         return address;
     }

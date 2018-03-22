@@ -1,6 +1,7 @@
 package fr.dauphine.rentproject2018.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -29,6 +30,7 @@ public class User {
 
     @Basic
     @Column(name = "lastName")
+    @NotNull
     public String getLastName() {
         return lastName;
     }
@@ -39,6 +41,7 @@ public class User {
 
     @Basic
     @Column(name = "firstName")
+    @NotNull
     public String getFirstName() {
         return firstName;
     }
@@ -49,6 +52,7 @@ public class User {
 
     @Basic
     @Column(name = "username")
+    @NotNull
     public String getUsername() {
         return username;
     }
@@ -69,6 +73,7 @@ public class User {
 
     @Basic
     @Column(name = "email")
+    @NotNull
     public String getEmail() {
         return email;
     }
@@ -79,6 +84,7 @@ public class User {
 
     @Basic
     @Column(name = "password")
+    @NotNull
     public String getPassword() {
         return password;
     }

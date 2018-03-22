@@ -10,6 +10,7 @@
         <class>fr.dauphine.rentproject2018.domain.Product</class>
         <class>fr.dauphine.rentproject2018.domain.Booking</class>
         <class>fr.dauphine.rentproject2018.domain.Configuration</class>
+        <class>fr.dauphine.rentproject2018.domain.Rent</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/rent-project-2018"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

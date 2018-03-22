@@ -1,8 +1,11 @@
 package fr.dauphine.rentproject2018.web;
 
 import fr.dauphine.rentproject2018.domain.User;
+import fr.dauphine.rentproject2018.service.BookingService;
+import fr.dauphine.rentproject2018.service.RentService;
 import fr.dauphine.rentproject2018.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +20,20 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RentService rentService;
+
+    @Autowired
+    private BookingService bookingService;
+
     @RequestMapping("preview")
     public String previewUserDetails(Principal principal, Model model) {
         User current = userService.findByUsername(principal.getName());
 
         model.addAttribute("user", current);
+        model.addAttribute("allRents", rentService.findAllByUser(current.getId()));
+        model.addAttribute("currentRents", rentService.findAllCurrentByUser(current.getId()));
+        model.addAttribute("currentBookings", bookingService.findAllCurrentByUser(current.getId()));
 
         return "account/preview";
     }

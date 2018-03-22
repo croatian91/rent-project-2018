@@ -20,7 +20,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role update(Role role) {
-        Role current = this.findOne(role.getId());
+        Role current = roleRepository.findById(role.getId());
 
         if (current != null) {
             current.setName(role.getName());

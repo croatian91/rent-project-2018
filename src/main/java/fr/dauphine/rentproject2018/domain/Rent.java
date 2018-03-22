@@ -1,7 +1,5 @@
 package fr.dauphine.rentproject2018.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,13 +8,11 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Booking {
+public class Rent {
     private int id;
     private Date start;
     private Date end;
-    private User user;
-    private Product product;
-    private Rent rent;
+    private Booking booking;
 
     @Id
     @Column(name = "id")
@@ -44,7 +40,6 @@ public class Booking {
     @Basic
     @Column(name = "end")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
     public Date getEnd() {
         return end;
     }
@@ -57,10 +52,10 @@ public class Booking {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Booking booking = (Booking) o;
-        return id == booking.id &&
-                Objects.equals(start, booking.start) &&
-                Objects.equals(end, booking.end);
+        Rent rent = (Rent) o;
+        return id == rent.id &&
+                Objects.equals(start, rent.start) &&
+                Objects.equals(end, rent.end);
     }
 
     @Override
@@ -69,36 +64,13 @@ public class Booking {
         return Objects.hash(id, start, end);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
-    public User getUser() {
-        return user;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "booking_id")
+    public Booking getBooking() {
+        return booking;
     }
 
-    @JsonProperty
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    @OneToOne(mappedBy = "booking")
-    @JsonIgnore
-    public Rent getRent() {
-        return rent;
-    }
-
-    @JsonProperty
-    public void setRent(Rent rent) {
-        this.rent = rent;
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }

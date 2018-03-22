@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -33,6 +34,7 @@ public class Product {
 
     @Basic
     @Column(name = "label")
+    @NotNull
     public String getLabel() {
         return label;
     }
@@ -43,6 +45,7 @@ public class Product {
 
     @Basic
     @Column(name = "daily_price")
+    @NotNull
     public float getDailyPrice() {
         return dailyPrice;
     }
@@ -53,6 +56,7 @@ public class Product {
 
     @Basic
     @Column(name = "deposit")
+    @NotNull
     public float getDeposit() {
         return deposit;
     }
@@ -63,6 +67,7 @@ public class Product {
 
     @Basic
     @Column(name = "daily_forfeit")
+    @NotNull
     public float getDailyForfeit() {
         return dailyForfeit;
     }

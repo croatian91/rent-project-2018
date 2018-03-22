@@ -52,15 +52,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <th:block th:each="rent, i : ${allRents}">
+                                <tr>
+                                    <td scope="row" th:text="${i.index + 1}">...</td>
+                                    <td th:text="${rent.booking.product.id}">...</td>
+                                    <td th:text="${rent.booking.product.label}">...</td>
+                                    <td th:text="${rent.booking.start}">...</td>
+                                    <td th:text="${rent.booking.end}">...</td>
+                                    <td th:text="${rent.booking.product.dailyPrice}">...</td>
+                                    <td th:text="${rent.booking.product.id}">...</td>
+                                </tr>
+                            </th:block>
                             </tbody>
                         </table>
                     </div>
@@ -79,15 +81,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                            </tr>
+                            <th:block th:each="rent, i : ${currentRents}">
+                                <tr>
+                                    <td scope="row" th:text="${i.index + 1}">...</td>
+                                    <td th:text="${rent.booking.product.id}">...</td>
+                                    <td th:text="${rent.booking.product.label}">...</td>
+                                    <td th:text="${rent.booking.start}">...</td>
+                                    <td th:text="${rent.booking.end}">...</td>
+                                    <td th:text="${rent.booking.product.dailyPrice}">...</td>
+                                    <td th:text="${rent.booking.product.deposit}">...</td>
+                                </tr>
+                            </th:block>
                             </tbody>
                         </table>
                     </div>
@@ -108,17 +112,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                            </tr>
+                            <th:block th:each="booking, i : ${currentBookings}">
+                                <tr>
+                                    <td scope="row" th:text="${i.index + 1}">...</td>
+                                    <td th:text="${booking.id}">...</td>
+                                    <td th:text="${booking.product.id}">...</td>
+                                    <td th:text="${booking.product.label}">...</td>
+                                    <td th:text="${booking.start}">...</td>
+                                    <td th:text="${booking.end}">...</td>
+                                    <td th:text="${booking.product.label}">...</td>
+                                    <td th:text="${booking.product.dailyPrice}">...</td>
+                                    <td th:text="${booking.product.deposit}">...</td>
+                                </tr>
+                            </th:block>
                             </tbody>
                         </table>
                     </div>

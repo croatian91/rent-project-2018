@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 public class BookingServiceImpl implements BookingService {
 
@@ -42,7 +44,22 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public Collection<Booking> findAllByUser(int id) {
+        return bookingRepository.findAllByUserIdOrderByEndDesc(id);
+    }
+
+    @Override
+    public Collection<Booking> findAllCurrentByUser(int id) {
+        return bookingRepository.findAllByRentEndIsNullAndUserIdOrderByEndDesc(id);
+    }
+
+    @Override
     public Page findAll(Pageable pageable) {
         return bookingRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page findAllCurrentByUser(Pageable pageable, int id) {
+        return bookingRepository.findAllByRentEndIsNullAndUserIdOrderByEndDesc(pageable, id);
     }
 }
