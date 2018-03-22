@@ -50,11 +50,11 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     <li class="page-item" th:classappend="${current == 0} ? disabled : ''">
-                        <a class="page-link" th:href="@{'/product/list?page=' + ${previous}}" tabindex="-1">Previous</a>
+                        <a class="page-link" th:href="@{'/booking/list?page=' + ${previous}}" tabindex="-1">Previous</a>
                     </li>
                     <th:block th:each="page : ${#numbers.sequence(0, totalPages - 1)}">
                         <li class="page-item" th:classappend="${current == page} ? active : ''">
-                            <a class="page-link" th:href="@{'/product/list?page=' + ${page}}" th:text="${page}">...</a>
+                            <a class="page-link" th:href="@{'/booking/list?page=' + ${page}}" th:text="${page}">...</a>
                         </li>
                     </th:block>
                     <li class="page-item" th:classappend="${current >= (totalPages - 1)} ? disabled : ''">
