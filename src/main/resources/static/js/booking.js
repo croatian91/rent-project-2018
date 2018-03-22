@@ -58,7 +58,10 @@ $(document).ready(function () {
 
             $.ajax({
                 type: 'GET',
-                url: `/api/booking/${id}/delete`
+                url: `/api/booking/${id}/delete`,
+                error: function () {
+                    errors = true;
+                }
             });
         }).promise().done(function () {
             if (errors)
