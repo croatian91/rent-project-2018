@@ -68,12 +68,12 @@
                     <li class="page-item" th:classappend="${current == 0} ? disabled : ''">
                         <a class="page-link" th:href="@{'/product/list?page=' + ${previous}}" tabindex="-1">Previous</a>
                     </li>
-                    <th:block th:each="page : ${#numbers.sequence(0, totalPages - 1)}">
+                    <th:block th:each="page : ${#numbers.sequence(0, totalPages)}">
                         <li class="page-item" th:classappend="${current == page} ? active : ''">
                             <a class="page-link" th:href="@{'/product/list?page=' + ${page}}" th:text="${page}">...</a>
                         </li>
                     </th:block>
-                    <li class="page-item" th:classappend="${current >= (totalPages - 1)} ? disabled : ''">
+                    <li class="page-item" th:classappend="${current >= totalPages} ? disabled : ''">
                         <a class="page-link" th:href="@{'/product/list?page=' + ${next}}">Next</a>
                     </li>
                 </ul>

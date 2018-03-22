@@ -17,7 +17,7 @@
         <div class="col-sm-12">
             <div class="table-responsive-sm">
                 <table class="table table-striped">
-                    <caption>List of your bookings</caption>
+                    <caption>List of your current bookings</caption>
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -52,12 +52,12 @@
                     <li class="page-item" th:classappend="${current == 0} ? disabled : ''">
                         <a class="page-link" th:href="@{'/booking/list?page=' + ${previous}}" tabindex="-1">Previous</a>
                     </li>
-                    <th:block th:each="page : ${#numbers.sequence(0, totalPages - 1)}">
+                    <th:block th:each="page : ${#numbers.sequence(0, totalPages)}">
                         <li class="page-item" th:classappend="${current == page} ? active : ''">
                             <a class="page-link" th:href="@{'/booking/list?page=' + ${page}}" th:text="${page}">...</a>
                         </li>
                     </th:block>
-                    <li class="page-item" th:classappend="${current >= (totalPages - 1)} ? disabled : ''">
+                    <li class="page-item" th:classappend="${current >= totalPages} ? disabled : ''">
                         <a class="page-link" th:href="@{'/booking/list?page=' + ${next}}">Next</a>
                     </li>
                 </ul>
