@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
     let getDiff = function (d1, d2) {
-        return Math.floor((Date.parse(d2) - Date.parse(d1)) / 86400000);
+        return (Date.parse(d2) - Date.parse(d1)) / 86400000;
     };
 
     let start = $('#start'),
