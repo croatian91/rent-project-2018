@@ -32,7 +32,7 @@
                     <th:block th:each="booking, i : ${bookings}">
                         <tr>
                             <td class="align-middle" scope="row" th:text="${i.index + 1}">...</td>
-                            <td><input class="form-check-input" type="checkbox" value="" th:id="${'check-' + booking.id}"></td>
+                            <td><input class="form-check-input" type="checkbox" value="" th:id="${booking.id}"></td>
                             <td class="align-middle" th:text="${booking.id}">...</td>
                             <td class="align-middle" th:text="${booking.product.label}">...</td>
                             <td class="align-middle" th:text="${(booking.end.getTime() - booking.start.getTime()) / 86400000}">...</td>
@@ -80,7 +80,7 @@
                 <p>Are you sure you want to delete the selected bookings?</p>
             </div>
             <div class="modal-footer">
-                <button id="confirm" type="button" class="btn btn-primary" data-dismiss="modal">Yes, delete</button>
+                <button id="confirm_all" type="button" class="btn btn-primary" data-dismiss="modal">Yes, delete</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

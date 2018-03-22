@@ -50,6 +50,27 @@ $(document).ready(function () {
         });
     });
 
+    $('#confirm_all').click(function () {
+        let errors = false;
+
+        $("input:checked").each(function () {
+            let id = $(this).attr('id');
+
+            $.ajax({
+                type: 'GET',
+                url: `/api/booking/${id}/delete`,
+                error: function () {
+                    displayMessage('Could not delete the booking. Please retry later.', 'danger');
+                }
+            });
+        }).promise().done(function () {
+            if (errors)
+                displayMessage('An error occurred during the deletion. Please retry later.', 'danger');
+            else
+                window.location.replace("/");
+        });
+    });
+
     function displayMessage(message, type) {
         $('#message').text(message);
         $('#alert').removeClass('alert-warning alert-danger alert-success alert-info').addClass(`alert-${type}`).slideDown();
