@@ -38,6 +38,18 @@ public class AccountController {
         return "account/preview";
     }
 
+    @RequestMapping("{accountID}")
+    public String previewUserDetails(@PathVariable("accountID") int accountID, Model model) {
+        User current = userService.findOne(accountID);
+
+        model.addAttribute("user", current);
+        model.addAttribute("allRents", rentService.findAllByUser(current.getId()));
+        model.addAttribute("currentRents", rentService.findAllCurrentByUser(current.getId()));
+        model.addAttribute("currentBookings", bookingService.findAllCurrentByUser(current.getId()));
+
+        return "account/preview";
+    }
+
     @RequestMapping("edit")
     public String editUserDetails(Principal principal, Model model) {
         User current = userService.findByUsername(principal.getName());
