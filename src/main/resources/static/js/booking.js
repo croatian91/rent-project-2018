@@ -58,10 +58,7 @@ $(document).ready(function () {
 
             $.ajax({
                 type: 'GET',
-                url: `/api/booking/${id}/delete`,
-                error: function () {
-                    displayMessage('Could not delete the booking. Please retry later.', 'danger');
-                }
+                url: `/api/booking/${id}/delete`
             });
         }).promise().done(function () {
             if (errors)
