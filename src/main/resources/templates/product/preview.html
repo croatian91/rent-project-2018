@@ -9,6 +9,10 @@
 </head>
 <body>
 <div class="container">
+    <!-- Alert -->
+    <div id="alert" class="alert alert-warning collapse">
+        <span id="message"></span>
+    </div>
     <th:block th:object="${product}">
         <div class="jumbotron">
             <div class="row">
@@ -16,7 +20,7 @@
                     <h1 id="name" class="display-4" th:text="${product.label}">...</h1>
                 </div>
                 <div class="col-sm-2">
-                    <button class="btn btn-primary" type="button">Add to cart</button>
+                    <button id="add" class="btn btn-primary" th:disabled="${#lists.contains(products, product)}" type="button">Add to cart</button>
                 </div>
             </div>
             <hr class="my-4">
@@ -46,6 +50,7 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <input id="id" type="hidden" th:field="${product.id}">
             <label for="description">Description</label>:
             <textarea id="description" class="form-control" rows="5" th:field="${product.description}" readonly="readonly"></textarea> <br/>
             <div class="row text-center">

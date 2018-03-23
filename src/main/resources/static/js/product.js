@@ -4,7 +4,7 @@ $(document).ready(function () {
     $('#update').click(function () {
         let form = $('.needs-validation')[0];
 
-        if (form.checkValidity() === false){
+        if (form.checkValidity() === false) {
             form.classList.add('was-validated');
         } else {
             $.ajax({
@@ -21,6 +21,23 @@ $(document).ready(function () {
                 }
             })
         }
+    });
+
+    $('#add').click(function () {
+        let id = $('#id').val();
+
+        $.ajax({
+            type: 'GET',
+            url: `/cart/add/product/${id}/`,
+            success: function () {
+                $('#add').attr('disabled', 'disabled');
+
+                displayMessage('Product added successfully to cart.', 'success');
+            },
+            error: function () {
+                displayMessage('Could not add the product to the cart. Please retry later.', 'danger');
+            }
+        })
     });
 
     function displayMessage(message, type) {

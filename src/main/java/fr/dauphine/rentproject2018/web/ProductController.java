@@ -1,10 +1,12 @@
 package fr.dauphine.rentproject2018.web;
 
+import fr.dauphine.rentproject2018.domain.Cart;
 import fr.dauphine.rentproject2018.domain.Product;
 import fr.dauphine.rentproject2018.service.CategoryService;
 import fr.dauphine.rentproject2018.service.ProductService;
 import fr.dauphine.rentproject2018.service.RentalPointService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("product")
+@Scope("session")
 public class ProductController {
 
     @Autowired
@@ -28,11 +31,17 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private Cart cart;
+
     @RequestMapping("/{productID}")
     public String previewProduct(@PathVariable(name = "productID") int productID, Model model) {
         Product current = productService.findOne(productID);
 
         model.addAttribute("product", current);
+        model.addAttribute("products", cart.getProducts());
+
+        System.out.println(cart.getProducts().size());
 
         return "product/preview";
     }
