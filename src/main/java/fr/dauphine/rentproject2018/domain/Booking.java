@@ -17,6 +17,7 @@ public class Booking {
     private User user;
     private Product product;
     private Rent rent;
+    private Configuration configuration;
 
     @Id
     @Column(name = "id")
@@ -100,5 +101,15 @@ public class Booking {
     @JsonProperty
     public void setRent(Rent rent) {
         this.rent = rent;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "configuration_id", nullable = false)
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
     }
 }

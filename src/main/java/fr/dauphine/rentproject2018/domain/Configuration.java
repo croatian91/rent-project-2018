@@ -1,7 +1,10 @@
 package fr.dauphine.rentproject2018.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +16,7 @@ public class Configuration {
     private int N_MOR;
     private int N_DMR;
     private int N_MOL;
+    private Collection<Booking> bookings;
 
     @Id
     @Column(name = "id")
@@ -109,5 +113,15 @@ public class Configuration {
     public int hashCode() {
 
         return Objects.hash(id, N_DML, N_DmL, A_DJ, N_MOR, N_DMR, N_MOL);
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "configuration")
+    @JsonIgnore
+    public Collection<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Collection<Booking> bookings) {
+        this.bookings = bookings;
     }
 }
