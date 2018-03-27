@@ -9,21 +9,21 @@ import java.util.Collection;
 @Component
 @Scope("session")
 public class Cart {
-    private Collection<Product> products = new ArrayList<>();
+    private Collection<BookingWrapper> bookingWrappers = new ArrayList<>();
 
-    public Collection<Product> getProducts() {
-        return products;
+    public Collection<BookingWrapper> getBookingWrappers() {
+        return bookingWrappers;
     }
 
-    public void setProducts(Collection<Product> products) {
-        this.products = products;
+    public void setBookingWrappers(Collection<BookingWrapper> bookingWrappers) {
+        this.bookingWrappers = bookingWrappers;
     }
 
-    public void addProduct(Product product) {
-        products.add(product);
+    public void addBookingWrapper(BookingWrapper bookingWrapper) {
+        bookingWrappers.add(bookingWrapper);
     }
 
-    public void removeProduct(Product product) {
-        products.remove(product);
+    public void removeBookingWrapper(BookingWrapper bookingWrapper) {
+        bookingWrappers.remove(bookingWrapper);
     }
 }

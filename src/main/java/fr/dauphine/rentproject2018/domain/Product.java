@@ -146,4 +146,20 @@ public class Product {
     public void setBookings(Collection<Booking> bookings) {
         this.bookings = bookings;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", label='" + label + '\'' +
+                ", dailyPrice=" + dailyPrice +
+                ", deposit=" + deposit +
+                ", dailyForfeit=" + dailyForfeit +
+                ", description='" + description + '\'' +
+                ", defaults='" + defaults + '\'' +
+                ", category=" + category +
+                ", rentalPoint=" + rentalPoint +
+                ", bookings=" + bookings +
+                '}';
+    }
 }

@@ -26,6 +26,8 @@ $(document).ready(function () {
     $('#add').click(function () {
         let id = $('#id').val();
 
+        console.log(id);
+
         $.ajax({
             type: 'GET',
             url: `/cart/add/product/${id}/`,

@@ -1,5 +1,6 @@
 package fr.dauphine.rentproject2018.web;
 
+import fr.dauphine.rentproject2018.domain.BookingWrapper;
 import fr.dauphine.rentproject2018.domain.Cart;
 import fr.dauphine.rentproject2018.domain.Product;
 import fr.dauphine.rentproject2018.service.CategoryService;
@@ -39,9 +40,7 @@ public class ProductController {
         Product current = productService.findOne(productID);
 
         model.addAttribute("product", current);
-        model.addAttribute("products", cart.getProducts());
-
-        System.out.println(cart.getProducts().size());
+        model.addAttribute("isInCart", cart.getBookingWrappers().stream().anyMatch(bookingWrapper -> bookingWrapper.getProduct().getId() == productID));
 
         return "product/preview";
     }

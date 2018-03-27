@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+
     <title>Products</title>
 
     <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"
@@ -32,15 +35,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <th:block th:each="product : ${products}">
-                        <tr th:id="${product.id}">
-                            <th class="align-middle"><img id="image" src="http://via.placeholder.com/100x100" alt="..." class="img-thumbnail"></th>
-                            <td class="align-middle" th:text="${product.label}">...</td>
-                            <td class="align-middle" th:text="${product.dailyPrice}">...</td>
-                            <td class="align-middle"><input type="date" class="form-control"/></td>
-                            <td class="align-middle"><input type="date" class="form-control"/></td>
-                            <td class="align-middle"><a role="button" class="oi oi-trash delete"></a></td>
-                        </tr>
+                    <th:block th:each="bookingWrapper : ${bookingWrappers}">
+                        <form id="form" name="f" th:action="@{/booking/create}" method="post">
+                            <input type="hidden" th:field="${bookingWrapper.product.id}">
+                            <tr class="product" th:id="${bookingWrapper.product.id}">
+                                <th class="align-middle"><img id="image" src="http://via.placeholder.com/100x100"
+                                                              alt="..." class="img-thumbnail"></th>
+                                <td class="align-middle" th:text="${bookingWrapper.product.label}">...</td>
+                                <td class="align-middle" th:text="${bookingWrapper.product.dailyPrice}">...</td>
+                                <td class="align-middle"><input type="date"
+                                                                th:value="${#dates.format(bookingWrapper.start, 'yyyy-MM-dd')}"
+                                                                name="start" class="form-control"/></td>
+                                <td class="align-middle"><input type="date" name="end"
+                                                                th:value="${#dates.format(bookingWrapper.end, 'yyyy-MM-dd')}"
+                                                                class="form-control"/></td>
+                                <td class="align-middle"><a role="button" class="oi oi-trash delete"></a></td>
+                            </tr>
+                        </form>
                     </th:block>
                     </tbody>
                 </table>

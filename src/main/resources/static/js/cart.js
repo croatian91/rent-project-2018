@@ -18,8 +18,27 @@ $(document).ready(function () {
         });
     });
 
-    $('#create').click(function () {
+    $('#create').click(function (e) {
+        let products = [];
 
+        $('tr.product').each(function (i, product) {
+            products.push({
+                'product': {
+                    'id': $(product).attr('id')
+                },
+                'start': $(product).find('[name=\'start\']').val(),
+                'end': $(product).find('[name=\'end\']').val()
+            })
+        });
+
+
+        $.ajax({
+            url: '/booking/create',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json; charset=UTF-8',
+            data: JSON.stringify(products)
+        });
     });
 
     function displayMessage(message, type) {
@@ -30,4 +49,8 @@ $(document).ready(function () {
             $('#alert').slideUp();
         }, 3000);
     }
+
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader($("meta[name='_csrf_header']").attr("content"), $("meta[name='_csrf']").attr("content"));
+    });
 });
