@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
+<div th:replace="fragments/header :: header">...</div>
 <div class="container">
     <div class="jumbotron" th:object="${user}">
         <div class="row">
