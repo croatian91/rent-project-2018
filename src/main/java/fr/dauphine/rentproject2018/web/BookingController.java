@@ -5,6 +5,7 @@ import fr.dauphine.rentproject2018.domain.BookingWrapper;
 import fr.dauphine.rentproject2018.domain.Product;
 import fr.dauphine.rentproject2018.domain.User;
 import fr.dauphine.rentproject2018.service.BookingService;
+import fr.dauphine.rentproject2018.service.ConfigurationService;
 import fr.dauphine.rentproject2018.service.ProductService;
 import fr.dauphine.rentproject2018.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class BookingController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ConfigurationService configurationService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(@PageableDefault(size = 5) Pageable pageable, Principal principal, Model model) {
@@ -62,6 +66,7 @@ public class BookingController {
             booking.setStart(bookingWrapper.getStart());
             booking.setEnd(bookingWrapper.getEnd());
             booking.setUser(current);
+            booking.setConfiguration(configurationService.findLast());
 
             bookingService.create(booking);
         }
