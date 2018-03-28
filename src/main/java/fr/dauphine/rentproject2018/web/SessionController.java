@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("cart")
