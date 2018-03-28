@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("cart")
@@ -47,9 +48,7 @@ public class SessionController {
     @RequestMapping("remove/product/{id}/")
     @ResponseStatus(value = HttpStatus.OK)
     public void remove(@PathVariable("id") int id) {
-        BookingWrapper bookingWrapper = new BookingWrapper();
-
-        bookingWrapper.setProduct(productService.findOne(id));
+        BookingWrapper bookingWrapper = cart.getBookingWrappers().stream().filter(bw -> bw.getProduct().getId() == id).findFirst().get();
 
         cart.removeBookingWrapper(bookingWrapper);
     }
