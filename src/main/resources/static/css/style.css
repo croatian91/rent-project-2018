@@ -17,3 +17,20 @@ form[name="f"] {
 .oi-eye {
     cursor: pointer;
 }
+
+::-webkit-input-placeholder {
+    color: peachpuff;
+    font-size: 11px;
+}
+::-moz-placeholder {
+    color: peachpuff;
+    font-size: 11px;
+}
+:-ms-input-placeholder {
+    color: peachpuff;
+    font-size: 11px;
+}
+::placeholder {
+    color: peachpuff;
+    font-size: 11px;
+}
