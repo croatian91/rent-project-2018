@@ -2,7 +2,8 @@ package fr.dauphine.rentproject2018.service;
 
 import fr.dauphine.rentproject2018.domain.User;
 import fr.dauphine.rentproject2018.repository.RoleRepository;
-import fr.dauphine.rentproject2018.index.UserRepository;
+import fr.dauphine.rentproject2018.elastic.UserElasticRepository;
+import fr.dauphine.rentproject2018.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,20 +15,23 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final UserElasticRepository userElasticRepository;
+
     private final RoleRepository roleRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserElasticRepository userElasticRepository, BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.userElasticRepository = userElasticRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.roleRepository = roleRepository;
     }
 
     @Override
     public User create(User user) {
-        return userRepository.save(user);
+        return userElasticRepository.save(userRepository.save(user));
     }
 
     @Override
@@ -40,6 +44,7 @@ public class UserServiceImpl implements UserService {
             current.setEmail(user.getEmail());
             current.setPassword(user.getPassword());
 
+            userElasticRepository.save(current);
             userRepository.save(current);
         }
 
@@ -48,6 +53,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(User user) {
+        userElasticRepository.delete(user);
         userRepository.delete(user);
     }
 
@@ -66,7 +72,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>(roleRepository.findAll()));
 
-        userRepository.save(user);
+        userElasticRepository.save(userRepository.save(user));
     }
 
     @Override

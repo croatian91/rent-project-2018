@@ -1,6 +1,8 @@
 package fr.dauphine.rentproject2018.domain;
 
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,12 +19,14 @@ public class User {
     private String address;
     private String email;
     private String password;
+    @Field(type = FieldType.Nested)
     private Collection<Role> roles;
+    @Field(type = FieldType.Nested)
     private Collection<Booking> bookings;
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

@@ -31,6 +31,7 @@ public class AccountController {
 
     @RequestMapping("preview")
     public String previewUserDetails(Principal principal, Model model) {
+        System.out.println(principal.getName());
         User current = userService.findByUsername(principal.getName());
 
         model.addAttribute("user", current);

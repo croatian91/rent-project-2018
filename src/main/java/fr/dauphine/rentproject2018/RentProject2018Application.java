@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories("fr.dauphine.rentproject2018.repository")
-@EnableElasticsearchRepositories(basePackages = "fr.dauphine.rentproject2018.index")
+@EnableElasticsearchRepositories(basePackages = "fr.dauphine.rentproject2018.elastic")
 public class RentProject2018Application {
 
     public static void main(String[] args) {
