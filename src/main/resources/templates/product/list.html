@@ -8,6 +8,8 @@
           th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="/webjars/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css"
           th:href="@{/webjars/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css}"/>
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" th:href="@{/css/jquery-ui.min.css}"/>
+    <link rel="stylesheet" href="/css/jquery-ui.structure.min.css" th:href="@{/css/jquery-ui.structure.min.css}"/>
     <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
@@ -15,52 +17,56 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-2">
-            <div id="categories" class="card">
-                <span class="text-center">Categories</span>
-                <th:block th:each="category : ${categories}">
-                <select id="categories-select" class="custom-select" size="8" multiple>
-                    <option th:value="${category.id}" th:text="${category.name}">...</option>
-                </select>
-                </th:block>
-            </div>
-            <div id="rental-points" class="card">
-                <span class="text-center">Rental points</span>
-                <th:block th:each="rentalPoint : ${rentalPoints}">
-                <select id="rental-select" class="custom-select" size="8" multiple>
-                    <option th:value="${rentalPoint.id}" th:text="${rentalPoint.name}">...</option>
-                </select>
-                </th:block>
-            </div>
-            <button id="search" type="button" class="btn btn-primary" style="margin-top: 15px;">Search</button>
+            <form action="/product/list">
+                <div id="categories" class="card">
+                    <span class="text-center">Categories</span>
+                    <th:block th:each="category : ${categories}">
+                        <select id="categories-select" name="categoryIds[]" class="custom-select" size="8" multiple>
+                            <option th:value="${category.id}" th:text="${category.name}">...</option>
+                        </select>
+                    </th:block>
+                </div>
+                <div id="rental-points" class="card">
+                    <span class="text-center">Rental points</span>
+                    <th:block th:each="rentalPoint : ${rentalPoints}">
+                        <select id="rental-select" name="rentalPointIds[]" class="custom-select" size="8" multiple>
+                            <option th:value="${rentalPoint.id}" th:text="${rentalPoint.name}">...</option>
+                        </select>
+                    </th:block>
+                </div>
+                <button id="search" type="submit" class="btn btn-primary" style="margin-top: 15px;">Search</button>
+            </form>
         </div>
         <div class="col-sm-10">
             <div class="table-responsive-sm">
-            <table class="table table-striped table-hover">
-                <caption>List of the products</caption>
-                <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Product name</th>
-                    <th scope="col">Daily price</th>
-                    <th scope="col">Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                <th:block th:each="product : ${products}">
-                <tr>
-                    <th class="align-middle"><img id="image" src="http://via.placeholder.com/100x100" alt="..." class="img-thumbnail"></th>
-                    <td class="align-middle" th:text="${product.label}">...</td>
-                    <td class="align-middle" th:text="${product.dailyPrice}">...</td>
-                    <td class="align-middle">
+                <table class="table table-striped table-hover">
+                    <caption>List of the products</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Product name</th>
+                        <th scope="col">Daily price</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="product : ${products}">
+                        <tr>
+                            <th class="align-middle"><img id="image" src="http://via.placeholder.com/100x100" alt="..."
+                                                          class="img-thumbnail"></th>
+                            <td class="align-middle" th:text="${product.label}">...</td>
+                            <td class="align-middle" th:text="${product.dailyPrice}">...</td>
+                            <td class="align-middle">
                 <span class="text-wrap" th:text="${product.description}">
                     ...
                 </span>
-                    </td>
-                    <td class="align-middle"><a class="oi oi-eye" th:href="@{'/product/' + ${product.id}}"></a></td>
-                </tr>
-                </th:block>
-                </tbody>
-            </table>
+                            </td>
+                            <td class="align-middle"><a class="oi oi-eye" th:href="@{'/product/' + ${product.id}}"></a>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
             </div>
 
             <nav aria-label="Page navigation example">
@@ -88,5 +94,7 @@
         th:src="@{/webjars/tether/1.3.7/dist/js/tether.min.js}"></script>
 <script src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"
         th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+<script src="js/jquery-ui.min.js" th:src="@{/js/jquery-ui.min.js}"></script>
 <script src="js/product.js" th:src="@{/js/product.js}"></script>
+<script src="js/search.js" th:src="@{/js/search.js}"></script>
 </html>

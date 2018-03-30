@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("administration")
 public class AdministrationController {
 
+    private final ConfigurationService configurationService;
+
     @Autowired
-    private ConfigurationService configurationService;
+    public AdministrationController(ConfigurationService configurationService) {
+        this.configurationService = configurationService;
+    }
 
     @RequestMapping("edit")
     public String editLatestConfiguration(Model model) {

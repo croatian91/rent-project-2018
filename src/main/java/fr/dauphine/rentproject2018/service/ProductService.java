@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 public interface ProductService {
 
@@ -17,4 +19,6 @@ public interface ProductService {
     Product findOne(int id);
 
     Page findAll(Pageable pageable);
+
+    Page findAllByCategoriesAndRentalPoints(Pageable pageable, Collection<Integer> categoryIds, Collection<Integer> rentalPointIds);
 }

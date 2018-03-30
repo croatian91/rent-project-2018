@@ -12,8 +12,12 @@ import java.util.Collection;
 @Service
 public class BookingServiceImpl implements BookingService {
 
+    private final BookingRepository bookingRepository;
+
     @Autowired
-    private BookingRepository bookingRepository;
+    public BookingServiceImpl(BookingRepository bookingRepository) {
+        this.bookingRepository = bookingRepository;
+    }
 
     @Override
     public Booking create(Booking booking) {

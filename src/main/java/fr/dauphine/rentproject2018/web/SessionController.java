@@ -18,11 +18,15 @@ import java.util.Date;
 @RequestMapping("cart")
 @Scope("session")
 public class SessionController {
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+
+    private final Cart cart;
 
     @Autowired
-    private Cart cart;
+    public SessionController(ProductService productService, Cart cart) {
+        this.productService = productService;
+        this.cart = cart;
+    }
 
     @RequestMapping("")
     public String cart(Model model) {

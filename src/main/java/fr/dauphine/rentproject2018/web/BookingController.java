@@ -14,27 +14,33 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Collection;
 
 @Controller
 @RequestMapping("booking")
 public class BookingController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    private final BookingService bookingService;
+
+    private final ProductService productService;
+
+    private final ConfigurationService configurationService;
 
     @Autowired
-    private BookingService bookingService;
-
-    @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private ConfigurationService configurationService;
+    public BookingController(UserService userService, BookingService bookingService, ProductService productService, ConfigurationService configurationService) {
+        this.userService = userService;
+        this.bookingService = bookingService;
+        this.productService = productService;
+        this.configurationService = configurationService;
+    }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(@PageableDefault(size = 5) Pageable pageable, Principal principal, Model model) {
@@ -58,7 +64,7 @@ public class BookingController {
 
         model.addAttribute("user", current);
 
-        for (BookingWrapper bookingWrapper: bookingWrappers) {
+        for (BookingWrapper bookingWrapper : bookingWrappers) {
             Booking booking = new Booking();
             Product product = productService.findOne(bookingWrapper.getProduct().getId());
 

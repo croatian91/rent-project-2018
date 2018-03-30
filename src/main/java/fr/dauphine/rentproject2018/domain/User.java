@@ -1,11 +1,14 @@
 package fr.dauphine.rentproject2018.domain;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Document(indexName = "dauphine", type = "user")
 public class User {
     private int id;
     private String lastName;

@@ -12,8 +12,12 @@ import java.security.Principal;
 @RequestMapping("/api")
 public class AccountRestController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public AccountRestController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping("/account/all")
     @ResponseStatus(HttpStatus.OK)

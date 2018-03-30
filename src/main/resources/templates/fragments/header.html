@@ -1,42 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
-    <a class="navbar-brand" href="#">Rent a project</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" sec:authorize="isAuthenticated()">
+        <a class="navbar-brand" href="#">Rent a project</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/product/list}">Products</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    My account
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" th:href="@{/account/preview}">View</a>
-                    <a class="dropdown-item" th:href="@{/account/edit}">Edit</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" th:href="@{/booking/list}">My bookings</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/cart}">Cart</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/administration/edit}">Administration</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search a client, a product..." aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/product/list}">Products</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        My account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/account/preview}">View</a>
+                        <a class="dropdown-item" th:href="@{/account/edit}">Edit</a>
+                        <a class="dropdown-item" th:href="@{/booking/list}">My bookings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="javascript: document.logoutForm.submit()">Logout</a>
+                        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                            <input hidden type="submit" value="Sign Out"/>
+                        </form>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/cart}">Cart</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/administration/edit}">Administration</a>
+                </li>
+            </ul>
+            <form id="searchForm" autocomplete="off" class="form-inline my-2 my-lg-0">
+                <input id="search" class="form-control mr-sm-2" name="q" type="search" placeholder="Search a client"
+                       aria-label="Search">
+            </form>
+        </div>
+    </nav>
+</div>
 </body>
 </html>

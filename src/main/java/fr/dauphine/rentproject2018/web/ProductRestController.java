@@ -9,17 +9,25 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping("/api")
 public class ProductRestController {
 
+    private final ProductService productService;
+
     @Autowired
-    private ProductService productService;
+    public ProductRestController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @RequestMapping("/product/all")
     @ResponseStatus(HttpStatus.OK)
-    public Page List(@PageableDefault(size = 5) Pageable pageable) {
-        return productService.findAll(pageable);
+    public Page List(@PageableDefault(size = 5) Pageable pageable,
+                     @RequestParam("categoryIds") Collection<Integer> categoryIds,
+                     @RequestParam("rentalPointIds") Collection<Integer> rentalPointIds) {
+        return productService.findAllByCategoriesAndRentalPoints(pageable, categoryIds, rentalPointIds);
     }
 
     @RequestMapping("/product/create")

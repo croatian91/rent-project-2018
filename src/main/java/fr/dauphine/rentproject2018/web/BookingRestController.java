@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class BookingRestController {
 
+    private final BookingService bookingService;
+
     @Autowired
-    private BookingService bookingService;
+    public BookingRestController(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
 
     @RequestMapping("/booking/all")
     @ResponseStatus(HttpStatus.OK)

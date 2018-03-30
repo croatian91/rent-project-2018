@@ -5,7 +5,6 @@ import fr.dauphine.rentproject2018.service.BookingService;
 import fr.dauphine.rentproject2018.service.RentService;
 import fr.dauphine.rentproject2018.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,14 +16,18 @@ import java.security.Principal;
 @RequestMapping("account")
 public class AccountController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    private final RentService rentService;
+
+    private final BookingService bookingService;
 
     @Autowired
-    private RentService rentService;
-
-    @Autowired
-    private BookingService bookingService;
+    public AccountController(UserService userService, RentService rentService, BookingService bookingService) {
+        this.userService = userService;
+        this.rentService = rentService;
+        this.bookingService = bookingService;
+    }
 
     @RequestMapping("preview")
     public String previewUserDetails(Principal principal, Model model) {

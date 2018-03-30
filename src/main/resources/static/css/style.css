@@ -18,19 +18,10 @@ form[name="f"] {
     cursor: pointer;
 }
 
-::-webkit-input-placeholder {
-    color: peachpuff;
-    font-size: 11px;
-}
-::-moz-placeholder {
-    color: peachpuff;
-    font-size: 11px;
-}
-:-ms-input-placeholder {
-    color: peachpuff;
-    font-size: 11px;
-}
-::placeholder {
-    color: peachpuff;
-    font-size: 11px;
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    background-color: aliceblue;
 }

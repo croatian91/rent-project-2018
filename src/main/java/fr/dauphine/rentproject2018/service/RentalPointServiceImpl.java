@@ -10,8 +10,12 @@ import java.util.Collection;
 @Service
 public class RentalPointServiceImpl implements RentalPointService {
 
+    private final RentalPointRepository rentalPointRepository;
+
     @Autowired
-    private RentalPointRepository rentalPointRepository;
+    public RentalPointServiceImpl(RentalPointRepository rentalPointRepository) {
+        this.rentalPointRepository = rentalPointRepository;
+    }
 
     @Override
     public Collection<RentalPoint> findAll() {

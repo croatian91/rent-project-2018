@@ -13,8 +13,12 @@ import java.util.Date;
 @Service
 public class RentServiceImpl implements RentService {
 
+    private final RentRepository rentRepository;
+
     @Autowired
-    private RentRepository rentRepository;
+    public RentServiceImpl(RentRepository rentRepository) {
+        this.rentRepository = rentRepository;
+    }
 
     @Override
     public Rent create(Rent rent) {

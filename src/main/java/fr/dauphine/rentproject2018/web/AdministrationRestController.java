@@ -12,8 +12,12 @@ import java.util.Collection;
 @RequestMapping("/api")
 public class AdministrationRestController {
 
+    private final ConfigurationService configurationService;
+
     @Autowired
-    private ConfigurationService configurationService;
+    public AdministrationRestController(ConfigurationService configurationService) {
+        this.configurationService = configurationService;
+    }
 
     @RequestMapping("/administration/all")
     @ResponseStatus(HttpStatus.OK)

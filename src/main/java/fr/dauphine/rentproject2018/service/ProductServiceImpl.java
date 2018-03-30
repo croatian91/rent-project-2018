@@ -7,11 +7,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    private final ProductRepository productRepository;
+
     @Autowired
-    private ProductRepository productRepository;
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public Product create(Product product) {
@@ -48,5 +54,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page findAll(Pageable pageable) {
         return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page findAllByCategoriesAndRentalPoints(Pageable pageable, Collection<Integer> categoryIds, Collection<Integer> rentalPointIds) {
+        return productRepository.findAllByCategoryIdInAndRentalPointIdIn(pageable, categoryIds, rentalPointIds);
     }
 }
