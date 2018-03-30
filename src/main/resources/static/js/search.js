@@ -8,13 +8,24 @@ $(document).ready(function () {
                 url: '/search',
                 data: {q: request.term},
                 success: function (data) {
-                    try {
-                        response($.map(data,
-                            function (user) {
-                                return {label: `${user.lastName} ${user.firstName}`, userId: user.id};
-                            }));
-                    } catch (err) {
-                        console.log(err);
+                    if (!data.length) {
+                        let result = [
+                            {
+                                label: 'No matches found',
+                                value: response.term
+                            }
+                        ];
+                        response(result);
+                    }
+                    else {
+                        try {
+                            response($.map(data,
+                                function (user) {
+                                    return {label: `${user.lastName} ${user.firstName}`, userId: user.id};
+                                }));
+                        } catch (err) {
+                            console.log(err);
+                        }
                     }
                 },
                 error: function () {
@@ -22,7 +33,8 @@ $(document).ready(function () {
             })
         },
         select: function (event, ui) {
-            window.location.href = `/account/${ui.item.userId}`;
+            if (typeof ui.item.userId !== 'undefined')
+                window.location.href = `/account/${ui.item.userId}`;
         },
         minLength: 2
     });
