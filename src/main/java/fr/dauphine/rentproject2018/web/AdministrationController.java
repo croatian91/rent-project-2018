@@ -22,6 +22,9 @@ public class AdministrationController {
     public String editLatestConfiguration(Model model) {
         Configuration current = configurationService.findLast();
 
+        if (current == null)
+            current = new Configuration();
+
         model.addAttribute("configuration", current);
 
         return "administration/edit";
