@@ -123,7 +123,10 @@
                                     <td th:text="${booking.product.label}">...</td>
                                     <td th:text="${#dates.format(booking.start, 'dd/MM/YYYY')}">...</td>
                                     <td th:text="${#dates.format(booking.end, 'dd/MM/YYYY')}">...</td>
-                                    <td th:text="${booking.product.label}">...</td>
+                                    <td th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}"
+                                        th:text="${days.convert(booking.end.getTime() - booking.start.getTime(), millis)}">
+                                        ...
+                                    </td>
                                     <td th:text="${booking.product.dailyPrice}">...</td>
                                     <td th:text="${booking.product.deposit}">...</td>
                                 </tr>

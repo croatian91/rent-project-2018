@@ -39,6 +39,8 @@ $(document).ready(function () {
             contentType: 'application/json; charset=UTF-8',
             data: JSON.stringify(products)
         });
+    }).promise(function () {
+        window.location.href = '/booking/list';
     });
 
     function displayMessage(message, type) {
