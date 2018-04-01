@@ -1,5 +1,6 @@
 package fr.dauphine.rentproject2018.web;
 
+import fr.dauphine.rentproject2018.Exception.BookingDateConflictException;
 import fr.dauphine.rentproject2018.domain.Booking;
 import fr.dauphine.rentproject2018.domain.BookingWrapper;
 import fr.dauphine.rentproject2018.domain.Product;
@@ -12,18 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 @Controller
 @RequestMapping("booking")
@@ -62,8 +60,10 @@ public class BookingController {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public ResponseEntity create(@RequestBody ArrayList<BookingWrapper> bookingWrappers, Principal principal, Model model) {
+    public @ResponseBody
+    Map<Integer, String> create(@RequestBody ArrayList<BookingWrapper> bookingWrappers, Principal principal, Model model) {
         User current = userService.findByUsername(principal.getName());
+        Map<Integer, String> errors = new HashMap<>();
 
         model.addAttribute("user", current);
 
@@ -77,10 +77,15 @@ public class BookingController {
             booking.setUser(current);
             booking.setConfiguration(configurationService.findLast());
 
-            bookingService.create(booking);
+            try {
+                bookingService.create(booking);
+            } catch (BookingDateConflictException b) {
+                errors.put(product.getId(), b.getMessage());
+                System.out.println(b.getMessage());
+            }
         }
 
-        return new ResponseEntity("test", new HttpHeaders(), HttpStatus.CREATED);
+        return errors;
     }
 
     @RequestMapping(value = "{bookingID}/edit", method = RequestMethod.GET)

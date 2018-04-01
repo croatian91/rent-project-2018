@@ -1,5 +1,6 @@
 package fr.dauphine.rentproject2018.service;
 
+import fr.dauphine.rentproject2018.Exception.BookingDateConflictException;
 import fr.dauphine.rentproject2018.domain.Booking;
 import fr.dauphine.rentproject2018.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +14,27 @@ import java.util.Collection;
 public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;
+    private final ConfigurationService configurationService;
 
     @Autowired
-    public BookingServiceImpl(BookingRepository bookingRepository) {
+    public BookingServiceImpl(BookingRepository bookingRepository, ConfigurationService configurationService) {
         this.bookingRepository = bookingRepository;
+        this.configurationService = configurationService;
     }
 
     @Override
     public Booking create(Booking booking) {
+        long N_DmL = configurationService.findLast().getN_DmL();
+        long N_DML = configurationService.findLast().getN_DML();
+        long diff = (booking.getEnd().getTime() - booking.getStart().getTime()) / 86400000;
+
+        if (booking.getEnd().getTime() < booking.getStart().getTime())
+            throw new BookingDateConflictException("End DATE cannot be earlier than start DATE");
+        else if (diff < N_DmL)
+            throw new BookingDateConflictException("RG2: Rent duration can't be less than " + N_DmL + " days");
+        else if (diff > N_DML)
+            throw new BookingDateConflictException("RG4: Rent duration can't be more than " + N_DML + " days");
+
         return bookingRepository.save(booking);
     }
 

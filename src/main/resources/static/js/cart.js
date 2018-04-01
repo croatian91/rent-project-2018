@@ -4,6 +4,52 @@ $(document).ready(function () {
     $('.delete').click(function () {
         let id = $(this).closest('tr').attr('id');
 
+        removeProduct(id);
+    });
+
+    $('#create').click(function () {
+        let bookings = [];
+
+        $('tr.product').each(function (i, product) {
+            bookings.push({
+                'product': {
+                    'id': $(product).attr('id')
+                },
+                'start': $(product).find('[name=\'start\']').val(),
+                'end': $(product).find('[name=\'end\']').val()
+            })
+        });
+
+        $.ajax({
+            url: '/booking/create',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json; charset=UTF-8',
+            data: JSON.stringify(bookings),
+            success: function (data) {
+                $('[data-toggle="popover"]').popover('dispose');
+
+                bookings.forEach(function (booking) {
+                    let productId = booking.product.id;
+
+                    if (Object.keys(data).indexOf(productId.toString()) === -1) {
+                        removeProduct(productId);
+                        $('#' + productId).popover('dispose');
+                    }
+                });
+
+                setTimeout(function () {
+                    Object.keys(data).forEach(function (productId) {
+                        $('#' + productId).popover({
+                            content: data[productId]
+                        }).popover('show');
+                    });
+                }, 1000);
+            }
+        });
+    });
+
+    function removeProduct(id) {
         $.ajax({
             type: 'GET',
             url: `/cart/remove/product/${id}/`,
@@ -16,33 +62,7 @@ $(document).ready(function () {
                 displayMessage('Could not remove the product from the cart. Please retry later.', 'danger');
             }
         });
-    });
-
-    $('#create').click(function () {
-        let products = [];
-
-        $('tr.product').each(function (i, product) {
-            products.push({
-                'product': {
-                    'id': $(product).attr('id')
-                },
-                'start': $(product).find('[name=\'start\']').val(),
-                'end': $(product).find('[name=\'end\']').val()
-            })
-        });
-
-
-        $.ajax({
-            url: '/booking/create',
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json; charset=UTF-8',
-            data: JSON.stringify(products),
-            success: function () {
-                window.location.href = '/booking/list';
-            }
-        });
-    });
+    }
 
     function displayMessage(message, type) {
         $('#message').text(message);

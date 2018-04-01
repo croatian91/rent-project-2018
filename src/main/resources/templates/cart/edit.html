@@ -40,7 +40,7 @@
                     <th:block th:each="bookingWrapper : ${bookingWrappers}">
                         <form id="form" name="f" th:action="@{/booking/create}" method="post">
                             <input type="hidden" th:field="${bookingWrapper.product.id}">
-                            <tr class="product" th:id="${bookingWrapper.product.id}">
+                            <tr class="product" data-toggle="popover" th:id="${bookingWrapper.product.id}">
                                 <th class="align-middle"><img id="image" src="http://via.placeholder.com/100x100"
                                                               alt="..." class="img-thumbnail"></th>
                                 <td class="align-middle" th:text="${bookingWrapper.product.label}">...</td>
@@ -68,6 +68,10 @@
 
 </body>
 <script src="webjars/jquery/2.1.4/jquery.min.js" th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+<script src="webjars/popper.js/1.14.1/dist/umd/popper-utils.min.js"
+        th:src="@{/webjars/popper.js/1.14.1/dist/umd/popper-utils.min.js}"></script>
+<script src="webjars/popper.js/1.14.1/dist/umd/popper.min.js"
+        th:src="@{/webjars/popper.js/1.14.1/dist/umd/popper.min.js}"></script>
 <script src="webjars/tether/1.3.7/dist/js/tether.min.js"
         th:src="@{/webjars/tether/1.3.7/dist/js/tether.min.js}"></script>
 <script src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"

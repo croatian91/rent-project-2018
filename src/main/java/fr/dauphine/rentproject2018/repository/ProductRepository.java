@@ -14,6 +14,4 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
     Product findById(int id);
 
     Page findAllByCategoryIdInAndRentalPointIdIn(Pageable pageable, Collection<Integer> categoryIds, Collection<Integer> rentalPointIds);
-
-    Collection<Product> findByLabelIgnoreCaseContainingOrCategoryNameIgnoreCaseContaining(String label, String name);
 }
