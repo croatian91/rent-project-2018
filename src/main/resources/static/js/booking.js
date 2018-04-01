@@ -66,8 +66,6 @@ $(document).ready(function () {
         }).promise().done(function () {
             if (errors)
                 displayMessage('An error occurred during the deletion. Please retry later.', 'danger');
-            else
-                window.location.replace("/");
         });
     });
 
