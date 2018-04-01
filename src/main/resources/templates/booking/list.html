@@ -8,8 +8,6 @@
           th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="/webjars/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css"
           th:href="@{/webjars/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css}"/>
-    <link rel="stylesheet" href="/css/jquery-ui.min.css" th:href="@{/css/jquery-ui.min.css}"/>
-    <link rel="stylesheet" href="/css/jquery-ui.structure.min.css" th:href="@{/css/jquery-ui.structure.min.css}"/>
     <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
@@ -37,7 +35,9 @@
                             <td><input class="form-check-input" type="checkbox" value="" th:id="${booking.id}"></td>
                             <td class="align-middle" th:text="${booking.id}">...</td>
                             <td class="align-middle" th:text="${booking.product.label}">...</td>
-                            <td class="align-middle" th:text="${(booking.end.getTime() - booking.start.getTime()) / 86400000}">...</td>
+                            <td class="align-middle"
+                                th:text="${(booking.end.getTime() - booking.start.getTime()) / 86400000}">...
+                            </td>
                             <td><a class="oi oi-eye" th:href="@{'/booking/' + ${booking.id} + '/edit'}"></a></td>
                         </tr>
                     </th:block>
@@ -97,7 +97,6 @@
         th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
 <script src="webjars/momentjs/2.20.1/min/moment-with-locales.min.js"
         th:src="@{/webjars/momentjs/2.20.1/min/moment-with-locales.min.js}"></script>
-<script src="js/jquery-ui.min.js" th:src="@{/js/jquery-ui.min.js}"></script>
 <script src="js/booking.js" th:src="@{/js/booking.js}"></script>
 <script src="js/search.js" th:src="@{/js/search.js}"></script>
 </html>

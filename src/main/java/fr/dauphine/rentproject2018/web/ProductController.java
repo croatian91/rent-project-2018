@@ -67,7 +67,7 @@ public class ProductController {
         model.addAttribute("rentalPoints", rentalPointService.findAll());
         model.addAttribute("products", products);
 
-        model.addAttribute("totalPages", products.getTotalPages());
+        model.addAttribute("totalPages", products.getTotalPages() == 0 ? 0 : products.getTotalPages() - 1);
         model.addAttribute("current", pageable.getPageNumber());
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());

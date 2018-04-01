@@ -18,7 +18,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#create').click(function (e) {
+    $('#create').click(function () {
         let products = [];
 
         $('tr.product').each(function (i, product) {
@@ -37,10 +37,11 @@ $(document).ready(function () {
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json; charset=UTF-8',
-            data: JSON.stringify(products)
+            data: JSON.stringify(products),
+            success: function () {
+                window.location.href = '/booking/list';
+            }
         });
-    }).promise(function () {
-        window.location.href = '/booking/list';
     });
 
     function displayMessage(message, type) {
@@ -52,7 +53,7 @@ $(document).ready(function () {
         }, 3000);
     }
 
-    $(document).ajaxSend(function(e, xhr, options) {
+    $(document).ajaxSend(function (e, xhr, options) {
         xhr.setRequestHeader($("meta[name='_csrf_header']").attr("content"), $("meta[name='_csrf']").attr("content"));
     });
 });

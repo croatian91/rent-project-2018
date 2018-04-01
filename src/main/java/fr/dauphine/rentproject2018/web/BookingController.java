@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,7 +53,7 @@ public class BookingController {
 
         model.addAttribute("bookings", bookings);
 
-        model.addAttribute("totalPages", bookings.getTotalPages());
+        model.addAttribute("totalPages", bookings.getTotalPages() == 0 ? 0 : bookings.getTotalPages() - 1);
         model.addAttribute("current", pageable.getPageNumber());
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());
@@ -59,7 +62,7 @@ public class BookingController {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public String create(@RequestBody ArrayList<BookingWrapper> bookingWrappers, Principal principal, Model model) {
+    public ResponseEntity create(@RequestBody ArrayList<BookingWrapper> bookingWrappers, Principal principal, Model model) {
         User current = userService.findByUsername(principal.getName());
 
         model.addAttribute("user", current);
@@ -77,7 +80,7 @@ public class BookingController {
             bookingService.create(booking);
         }
 
-        return "account/preview";
+        return new ResponseEntity("test", new HttpHeaders(), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "{bookingID}/edit", method = RequestMethod.GET)
