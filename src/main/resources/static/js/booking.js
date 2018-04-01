@@ -42,7 +42,7 @@ $(document).ready(function () {
             type: 'GET',
             url: `/api/booking/${id}/delete`,
             success: function () {
-                window.location.replace("/");
+
             },
             error: function () {
                 displayMessage('Could not delete the booking. Please retry later.', 'danger');
