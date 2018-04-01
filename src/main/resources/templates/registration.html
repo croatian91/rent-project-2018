@@ -11,37 +11,50 @@
 <div class="container">
     <div tiles:fragment="content">
         <form name="f" th:action="@{/registration}" th:object="${userForm}" method="post">
+            <legend>Registration</legend>
             <div class="form-group row">
-                <fieldset>
-                    <legend>Registration</legend>
-
+                <div class="form-group col-md-6">
                     <label for="firstname">First name</label>:
-                    <input type="firstName" id="firstName" class="form-control" name="firstName" autofocus="autofocus"/> <br/>
-
+                    <input type="firstName" id="firstName" class="form-control" name="firstName"
+                           autofocus="autofocus"/> <br/>
+                </div>
+                <div class="form-group col-md-6">
                     <label for="lastName">Last name</label>:
-                    <input type="lastName" id="lastName" class="form-control" name="lastName" autofocus="autofocus"/> <br/>
+                    <input type="lastName" id="lastName" class="form-control" name="lastName"
+                           autofocus="autofocus"/> <br/>
+                </div>
+            </div>
 
-                    <label for="address">Address</label>:
-                    <input type="address" id="address" class="form-control" name="address" autofocus="autofocus"/> <br/>
+            <label for="address">Address</label>:
+            <input type="address" id="address" class="form-control" name="address" autofocus="autofocus"/>
+            <br/>
 
+            <div class="form-group row">
+                <div class="form-group col-md-6">
                     <label for="username">Username</label>:
                     <input type="text" id="username" name="username" class="form-control"/> <br/>
-
+                </div>
+                <div class="form-group col-md-6">
                     <label for="email">Email</label>:
                     <input type="text" id="email" name="email" class="form-control"/> <br/>
+                </div>
+            </div>
 
+            <div class="form-group row">
+                <div class="form-group col-md-6">
                     <label for="password">Password</label>:
                     <input type="password" id="password" class="form-control" name="password"/> <br/>
-
+                </div>
+                <div class="form-group col-md-6">
                     <label for="passwordConfirm">Confirm password</label>:
                     <input type="password" id="passwordConfirm" class="form-control" name="passwordConfirm"/> <br/>
+                </div>
+            </div>
 
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Register</button>
-                        <a id="login" th:href="@{/login}">
-                            Login</a>
-                    </div>
-                </fieldset>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Register</button>
+                <a id="login" th:href="@{/login}">
+                    Login</a>
             </div>
         </form>
     </div>
