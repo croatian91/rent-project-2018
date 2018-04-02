@@ -1,6 +1,8 @@
 'use strict';
 
 $(document).ready(function () {
+    let ctx = $("meta[name='_ctx']").attr("content") ? $("meta[name='_ctx']").attr("content") : '';
+
     $('#update').click(function () {
         let form = $('.needs-validation')[0];
 
@@ -9,7 +11,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: 'PUT',
-                url: '/api/administration/create',
+                url: `${ctx}/api/administration/create`,
                 data: $('form').serialize(),
                 cache: false,
                 processData: false,

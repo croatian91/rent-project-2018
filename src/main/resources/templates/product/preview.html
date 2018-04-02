@@ -3,6 +3,7 @@
       xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title tiles:fragment="title">Preview a product</title>
+    <meta name="_ctx" th:content="${#httpServletRequest.getContextPath()}" />
 
     <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>

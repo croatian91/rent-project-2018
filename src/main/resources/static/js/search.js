@@ -1,11 +1,13 @@
 'use strict';
 
 $(document).ready(function () {
+    let ctx = $("meta[name='_ctx']").attr("content") ? $("meta[name='_ctx']").attr("content") : '';
+
     $('#search').autocomplete({
         source: function (request, response) {
             $.ajax({
                 type: 'GET',
-                url: '/search',
+                url: `${ctx}/search`,
                 data: {q: request.term},
                 success: function (data) {
                     if (!data.length) {
@@ -34,7 +36,7 @@ $(document).ready(function () {
         },
         select: function (event, ui) {
             if (typeof ui.item.userId !== 'undefined')
-                window.location.href = `/account/${ui.item.userId}`;
+                window.location.href = `${ctx}/account/${ui.item.userId}`;
         },
         minLength: 2
     });

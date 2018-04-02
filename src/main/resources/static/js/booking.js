@@ -1,6 +1,7 @@
 'use strict';
 
 $(document).ready(function () {
+    let ctx = $("meta[name='_ctx']").attr("content") ? $("meta[name='_ctx']").attr("content") : '';
     let getDiff = function (d1, d2) {
         return (Date.parse(d2) - Date.parse(d1)) / 86400000;
     };
@@ -21,7 +22,7 @@ $(document).ready(function () {
     $('#update').click(function () {
         $.ajax({
             type: 'PUT',
-            url: '/api/booking/update',
+            url: `${ctx}/api/booking/update`,
             data: $('form').serialize(),
             cache: false,
             processData: false,
@@ -40,7 +41,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'GET',
-            url: `/api/booking/${id}/delete`,
+            url: `${ctx}/api/booking/${id}/delete`,
             success: function () {
 
             },
@@ -58,7 +59,10 @@ $(document).ready(function () {
 
             $.ajax({
                 type: 'GET',
-                url: `/api/booking/${id}/delete`,
+                url: `${ctx}/api/booking/${id}/delete`,
+                success: function () {
+                    removeBooking(id);
+                },
                 error: function () {
                     errors = true;
                 }
@@ -68,6 +72,12 @@ $(document).ready(function () {
                 displayMessage('An error occurred during the deletion. Please retry later.', 'danger');
         });
     });
+
+    function removeBooking(id) {
+        $('#' + id).closest('tr').fadeOut('slow', function () {
+            $(this).remove();
+        });
+    }
 
     function displayMessage(message, type) {
         $('#message').text(message);

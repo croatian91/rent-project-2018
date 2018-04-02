@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
+    <meta name="_ctx" th:content="${#httpServletRequest.getContextPath()}"/>
 
     <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
@@ -17,22 +18,23 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-2">
-            <form action="/product/list">
+            <form th:action="@{/product/list}">
                 <div id="categories" class="card">
                     <span class="text-center">Categories</span>
-                    <th:block th:each="category : ${categories}">
-                        <select id="categories-select" name="categoryIds[]" class="custom-select" size="8" multiple>
+                    <select id="categories-select" name="categoryIds[]" class="custom-select" size="8" multiple>
+                        <th:block th:each="category : ${categories}">
                             <option th:value="${category.id}" th:text="${category.name}">...</option>
-                        </select>
-                    </th:block>
+                        </th:block>
+                    </select>
+
                 </div>
                 <div id="rental-points" class="card">
                     <span class="text-center">Rental points</span>
-                    <th:block th:each="rentalPoint : ${rentalPoints}">
-                        <select id="rental-select" name="rentalPointIds[]" class="custom-select" size="8" multiple>
+                    <select id="rental-select" name="rentalPointIds[]" class="custom-select" size="8" multiple>
+                        <th:block th:each="rentalPoint : ${rentalPoints}">
                             <option th:value="${rentalPoint.id}" th:text="${rentalPoint.name}">...</option>
-                        </select>
-                    </th:block>
+                        </th:block>
+                    </select>
                 </div>
                 <button id="search" type="submit" class="btn btn-primary" style="margin-top: 15px;">Search</button>
             </form>

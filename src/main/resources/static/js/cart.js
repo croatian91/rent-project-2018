@@ -1,6 +1,8 @@
 'use strict';
 
 $(document).ready(function () {
+    let ctx = $("meta[name='_ctx']").attr("content") ? $("meta[name='_ctx']").attr("content") : '';
+
     $('.delete').click(function () {
         let id = $(this).closest('tr').attr('id');
 
@@ -21,7 +23,7 @@ $(document).ready(function () {
         });
 
         $.ajax({
-            url: '/booking/create',
+            url: `${ctx}/booking/create`,
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json; charset=UTF-8',
@@ -52,7 +54,7 @@ $(document).ready(function () {
     function removeProduct(id) {
         $.ajax({
             type: 'GET',
-            url: `/cart/remove/product/${id}/`,
+            url: `${ctx}/cart/remove/product/${id}/`,
             success: function () {
                 $(`#${id}`).fadeOut('slow', function () {
                     $(this).remove();

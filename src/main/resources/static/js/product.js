@@ -1,6 +1,8 @@
 'use strict';
 
 $(document).ready(function () {
+    let ctx = $("meta[name='_ctx']").attr("content") ? $("meta[name='_ctx']").attr("content") : '';
+
     $('#update').click(function () {
         let form = $('.needs-validation')[0];
 
@@ -9,7 +11,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: 'PUT',
-                url: '/api/product/update',
+                url: `${ctx}/api/product/update`,
                 data: $('form').serialize(),
                 cache: false,
                 processData: false,
@@ -30,7 +32,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'GET',
-            url: `/cart/add/product/${id}/`,
+            url: `${ctx}/cart/add/product/${id}/`,
             success: function () {
                 $('#add').attr('disabled', 'disabled');
 

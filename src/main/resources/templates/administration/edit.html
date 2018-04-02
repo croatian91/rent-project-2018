@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title tiles:fragment="title">Edit administration details</title>
+    <meta name="_ctx" th:content="${#httpServletRequest.getContextPath()}" />
 
     <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
