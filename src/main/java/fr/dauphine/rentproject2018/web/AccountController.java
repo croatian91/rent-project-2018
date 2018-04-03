@@ -48,7 +48,7 @@ public class AccountController {
         model.addAttribute("user", current);
         model.addAttribute("allRents", rentService.findAllByUser(current.getId()));
         model.addAttribute("currentRents", rentService.findAllCurrentByUser(current.getId()));
-        model.addAttribute("currentBookings", bookingService.findAllCurrentByUser(current.getId()));
+        model.addAttribute("currentBookings", bookingService.findAllByUser(current.getId()));
 
         return "account/preview";
     }
