@@ -38,7 +38,7 @@
                     <a class="nav-link" th:href="@{/administration/edit}">Administration</a>
                 </li>
             </ul>
-            <form id="searchForm" autocomplete="off" class="form-inline my-2 my-lg-0">
+            <form id="searchForm" autocomplete="off" class="form-inline my-2 my-lg-0" sec:authorize="hasAnyRole('ROLE_EMPLOYEE','ROLE_ADMIN')">
                 <input id="search" class="form-control mr-sm-2" name="q" type="search" placeholder="Search a client"
                        aria-label="Search">
             </form>
