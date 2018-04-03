@@ -28,7 +28,9 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm) {
-        userService.save(userForm);
+        User user = userService.create(userForm);
+
+        System.out.println(user.getId());
 
         return "redirect:/";
     }

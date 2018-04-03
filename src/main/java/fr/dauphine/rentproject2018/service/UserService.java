@@ -16,7 +16,9 @@ public interface UserService {
 
     Iterable<User> findAll();
 
-    void save(User user);
+    User save(User user);
+
+    User saveElastic(User user);
 
     User findByUsername(String username);
 }

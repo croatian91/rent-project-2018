@@ -1,8 +1,8 @@
 package fr.dauphine.rentproject2018.service;
 
 import fr.dauphine.rentproject2018.domain.User;
-import fr.dauphine.rentproject2018.repository.RoleRepository;
 import fr.dauphine.rentproject2018.elastic.UserElasticRepository;
+import fr.dauphine.rentproject2018.repository.RoleRepository;
 import fr.dauphine.rentproject2018.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,7 +31,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
-        return userElasticRepository.save(userRepository.save(user));
+        User saved = this.save(user);
+
+        this.saveElastic(saved);
+
+        return saved;
     }
 
     @Override
@@ -68,11 +72,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>(roleRepository.findAll()));
 
-        userElasticRepository.save(userRepository.save(user));
+        return userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public User saveElastic(User user) {
+        return userElasticRepository.save(user);
     }
 
     @Override

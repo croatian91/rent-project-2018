@@ -1,5 +1,7 @@
 package fr.dauphine.rentproject2018.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -19,9 +21,9 @@ public class User {
     private String address;
     private String email;
     private String password;
-    @Field(type = FieldType.Nested)
+    @Field(type = FieldType.Nested, ignoreFields = {"roles"})
     private Collection<Role> roles;
-    @Field(type = FieldType.Nested)
+    @Field(type = FieldType.Nested, ignoreFields = {"bookings"})
     private Collection<Booking> bookings;
 
     @Id
@@ -42,8 +44,8 @@ public class User {
         return lastName;
     }
 
-    public void setLastName(String lastname) {
-        this.lastName = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Basic
@@ -58,7 +60,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     @NotNull
     public String getUsername() {
         return username;
@@ -79,7 +81,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @NotNull
     public String getEmail() {
         return email;
@@ -119,19 +121,23 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "User_Role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonIgnore
     public Collection<Role> getRoles() {
         return roles;
     }
 
+    @JsonProperty
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
     public Collection<Booking> getBookings() {
         return bookings;
     }
 
+    @JsonProperty
     public void setBookings(Collection<Booking> bookings) {
         this.bookings = bookings;
     }
